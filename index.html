@@ -17,12 +17,14 @@ body {
   background: url("./roses.jpg") no-repeat center center fixed;
   background-size: cover;
   color: white;
+  overflow: hidden;
 }
 
 .container {
   background-color: rgba(0,0,0,0.6);
   padding: 30px 40px;
   border-radius: 20px;
+  position: relative;
 }
 
 button {
@@ -31,49 +33,87 @@ button {
   margin: 10px;
   cursor: pointer;
 }
+
+#noBtn {
+  position: relative;
+}
+
+/* Hearts animation */
+.heart {
+  position: absolute;
+  color: pink;
+  font-size: 24px;
+  animation: floatUp 2s linear forwards;
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-150px);
+  }
+}
 </style>
 </head>
 
 <body>
 
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container" id="content">
   <h1 id="question">Will you be my Valentine? 💘</h1>
-  <button onclick="yesPage()">Yes Please Daddy💕</button>
-  <button id="noBtn" onclick="noStep()">No Fuck Off</button>
+  <button onclick="yesClicked()">Yes 💕</button>
+  <button id="noBtn" onmouseover="moveNo()">No</button>
 </div>
 
 <script>
 let step = 0;
-let size = 18;
+const music = document.getElementById("bgMusic");
+
+function playMusic() {
+  music.play().catch(()=>{});
+}
+
+function hearts() {
+  for (let i = 0; i < 10; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = window.innerHeight - 100 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 2000);
+  }
+}
 
 function updateContent(html) {
   document.getElementById("content").innerHTML = html;
 }
 
-function noStep() {
+function moveNo() {
   const noBtn = document.getElementById("noBtn");
-  size -= 3;
-  noBtn.style.fontSize = size + "px";
-  step++;
-
-  if (step === 1) {
-    document.getElementById("question").innerText = "Come on… say yes 😏";
-  } 
-  else if (step === 2) {
-    document.getElementById("question").innerText = "Pretty please? 🥺";
-  } 
-  else if (step === 3) {
-    updateContent(`
-      <h1>Now you’re stuck… you have to say yes 💖</h1>
-      <button onclick="timePage()">Yes 💕</button>
-    `);
-  }
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-function yesPage() {
+function yesClicked() {
+  playMusic();
+  hearts();
   timePage();
 }
-
+  
+  background: url("./roses.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  overflow: hidden;
+  
 function timePage() {
   updateContent(`
     <h1>Is 13:00 PM good for you? ⏰</h1>
@@ -91,14 +131,15 @@ function timeNo() {
 }
 
 function finalChoice() {
+  hearts();
   updateContent(`
     <h1>I’ll pick you up at 13:00 PM 😎</h1>
     <button onclick="finalYes()">Okay 💕</button>
-    <button disabled>There is no second option 😏</button>
   `);
 }
 
 function finalYes() {
+  hearts();
   updateContent(`
     <h1>Yay! It’s a date 💖🌹</h1>
     <p>I can’t wait to see you!</p>
