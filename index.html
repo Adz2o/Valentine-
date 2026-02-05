@@ -63,15 +63,16 @@ function noStep() {
   } else if (step === 2) {
     question.innerText = "Just say yes already 🥺";
   } else if (step === 3) {
-    question.innerText = "Cold One Look What U Did, Go Press Yes  💖";
+    question.innerText = "Now you’re stuck, you must say yes 💖";
     document.getElementById("buttons").innerHTML =
       '<button onclick="timePage()">Yes 💕</button>';
   }
-  }
+}
 
 function yesPage() {
   timePage();
 }
+  
 }
 function timePage() {
   document.body.innerHTML = `
