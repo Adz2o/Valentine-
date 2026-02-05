@@ -1,10 +1,16 @@
+Adam Seyam
+​
+Adam Seyam​
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Valentine 💖</title>
-  <style>
-    body {
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
   text-align: center;
   font-family: Arial, sans-serif;
   background-image: url("roses.jpg");
@@ -15,37 +21,33 @@
   color: white;
 }
 
-    img {
-      width: 300px;
-      border-radius: 20px;
-      margin-top: 20px;
-    }
+.container {
+  background-color: rgba(0,0,0,0.6);
+  padding: 30px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 50px;
+}
 
-    h1 {
-      margin-top: 20px;
-    }
-
-    .buttons {
-      margin-top: 20px;
-    }
-
-    button {
-      font-size: 18px;
-      padding: 10px 20px;
-      margin: 10px;
-      cursor: pointer;
-    }
-  </style>
+button {
+  font-size: 18px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+</style>
 </head>
+
 <body>
 
-  <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Flowers">
+<div class="container">
   <h1 id="question">Will you be my Valentine? 💘</h1>
 
-  <div class="buttons" id="buttons">
-    <button onclick="yesPage()">Yes 💕</button>
-    <button id="noBtn" onclick="noStep()">No</button>
+  <div id="buttons">
+    <button onclick="yesPage()">Yes Please Daddy 💕</button>
+    <button id="noBtn" onclick="noStep()">No Fuck Off</button>
   </div>
+</div>
 
 <script>
 let step = 0;
@@ -65,7 +67,7 @@ function noStep() {
   } else if (step === 2) {
     question.innerText = "Just say yes already 🥺";
   } else if (step === 3) {
-    question.innerText = "Now you’re stuck, you must say yes 💖";
+    question.innerText = "See What You Did, Now you’re stuck, you must say yes 💖";
     document.getElementById("buttons").innerHTML =
       '<button onclick="timePage()">Yes 💕</button>';
   }
@@ -77,30 +79,40 @@ function yesPage() {
 
 function timePage() {
   document.body.innerHTML = `
-    <h1>Is 1:00 PM good for you? ⏰</h1>
-    <button onclick="yesFinal()">Yes</button>
-    <button onclick="noTime()">No</button>
+    <div class="container">
+      <h1>Is 1:00 PM good for you? ⏰</h1>
+      <button onclick="yesFinal()">Yes</button>
+      <button onclick="noTime()">No</button>
+    </div>
   `;
 }
 
 function noTime() {
   document.body.innerHTML = `
-    <h1>What time works for you?</h1>
-    <button onclick="alert('Text me the time ❤️')">Text me what time</button>
-    <button onclick="finalChoice()">Are you saying no because you don’t want to meet?</button>
+    <div class="container">
+      <h1>What time works for you?</h1>
+      <button onclick="alert('Text me the time ❤️')">Text me what time</button>
+      <button onclick="finalChoice()">Are you saying no because you don’t want to meet?</button>
+    </div>
   `;
 }
 
 function finalChoice() {
   document.body.innerHTML = `
-    <h1>I will pick you up at 1:00 PM 😎</h1>
-    <button onclick="alert('Yay! See you then 💕')">Okay</button>
-    <button disabled>There is no second option 😏</button>
+    <div class="container">
+      <h1>I will pick you up at 1:00 PM 😎</h1>
+      <button onclick="alert('Yay! See you then 💕')">Okay</button>
+      <button disabled>There is no second option 😏</button>
+    </div>
   `;
 }
 
 function yesFinal() {
-  document.body.innerHTML = "<h1>Yay! It’s a date 💖🌹</h1>";
+  document.body.innerHTML = `
+    <div class="container">
+      <h1>Yay! It’s a date 💖🌹</h1>
+    </div>
+  `;
 }
 </script>
 
