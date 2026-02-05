@@ -1,4 +1,4 @@
-​<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,23 +7,22 @@
 <style>
 body {
   margin: 0;
-  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   font-family: Arial, sans-serif;
-  background-image: url("roses.jpg");
+
+  background: url("./roses.jpg") no-repeat center center fixed;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
   color: white;
 }
 
 .container {
   background-color: rgba(0,0,0,0.6);
-  padding: 30px;
+  padding: 30px 40px;
   border-radius: 20px;
-  display: inline-block;
-  margin-top: 50px;
 }
 
 button {
@@ -37,36 +36,37 @@ button {
 
 <body>
 
-<div class="container">
+<div class="container" id="content">
   <h1 id="question">Will you be my Valentine? 💘</h1>
-
-  <div id="buttons">
-    <button onclick="yesPage()">Yes Please Daddy 💕</button>
-    <button id="noBtn" onclick="noStep()">No Fuck Off</button>
-  </div>
+  <button onclick="yesPage()">Yes Please Daddy💕</button>
+  <button id="noBtn" onclick="noStep()">No Fuck Off</button>
 </div>
 
 <script>
 let step = 0;
 let size = 18;
 
+function updateContent(html) {
+  document.getElementById("content").innerHTML = html;
+}
+
 function noStep() {
-  const question = document.getElementById("question");
   const noBtn = document.getElementById("noBtn");
   size -= 3;
   noBtn.style.fontSize = size + "px";
-  noBtn.style.marginTop = (step * 20) + "px";
-
   step++;
 
   if (step === 1) {
-    question.innerText = "You should say yes 😏";
-  } else if (step === 2) {
-    question.innerText = "Just say yes already 🥺";
-  } else if (step === 3) {
-    question.innerText = "See What You Did, Now you’re stuck, you must say yes 💖";
-    document.getElementById("buttons").innerHTML =
-      '<button onclick="timePage()">Yes 💕</button>';
+    document.getElementById("question").innerText = "Come on… say yes 😏";
+  } 
+  else if (step === 2) {
+    document.getElementById("question").innerText = "Pretty please? 🥺";
+  } 
+  else if (step === 3) {
+    updateContent(`
+      <h1>Now you’re stuck… you have to say yes 💖</h1>
+      <button onclick="timePage()">Yes 💕</button>
+    `);
   }
 }
 
@@ -75,41 +75,34 @@ function yesPage() {
 }
 
 function timePage() {
-  document.body.innerHTML = `
-    <div class="container">
-      <h1>Is 1:00 PM good for you? ⏰</h1>
-      <button onclick="yesFinal()">Yes</button>
-      <button onclick="noTime()">No</button>
-    </div>
-  `;
+  updateContent(`
+    <h1>Is 13:00 PM good for you? ⏰</h1>
+    <button onclick="finalYes()">Yes</button>
+    <button onclick="timeNo()">No</button>
+  `);
 }
 
-function noTime() {
-  document.body.innerHTML = `
-    <div class="container">
-      <h1>What time works for you?</h1>
-      <button onclick="alert('Text me the time ❤️')">Text me what time</button>
-      <button onclick="finalChoice()">Are you saying no because you don’t want to meet?</button>
-    </div>
-  `;
+function timeNo() {
+  updateContent(`
+    <h1>What time works for you?</h1>
+    <button onclick="alert('Text me the time ❤️')">Text me what time</button>
+    <button onclick="finalChoice()">Are you saying no because you don’t want to meet?</button>
+  `);
 }
 
 function finalChoice() {
-  document.body.innerHTML = `
-    <div class="container">
-      <h1>I will pick you up at 1:00 PM 😎</h1>
-      <button onclick="alert('Yay! See you then 💕')">Okay</button>
-      <button disabled>There is no second option 😏</button>
-    </div>
-  `;
+  updateContent(`
+    <h1>I’ll pick you up at 13:00 PM 😎</h1>
+    <button onclick="finalYes()">Okay 💕</button>
+    <button disabled>There is no second option 😏</button>
+  `);
 }
 
-function yesFinal() {
-  document.body.innerHTML = `
-    <div class="container">
-      <h1>Yay! It’s a date 💖🌹</h1>
-    </div>
-  `;
+function finalYes() {
+  updateContent(`
+    <h1>Yay! It’s a date 💖🌹</h1>
+    <p>I can’t wait to see you!</p>
+  `);
 }
 </script>
 
