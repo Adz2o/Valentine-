@@ -38,60 +38,63 @@ button {
 <body>
 
 <div class="box">
-  <h1 id="question">Will u be my Valentine? 💘</h1>
+  <h1 id="question">Will you be my Valentine?</h1>
   <div id="buttons">
-    <button class="yes" onclick="yesClick()">Yes</button>
-    <button class="no" id="noBtn" onclick="noClick()">No</button>
+    <button id="yesBtn" onclick="yesClicked()">Yes</button>
+    <button id="noBtn" onclick="noClicked()">No</button>
   </div>
 </div>
 
 <script>
   let noCount = 0;
 
-  function noClick() {
+  function noClicked() {
     noCount++;
     let noBtn = document.getElementById("noBtn");
 
-    if (noCount < 3) {
+    if (noCount <= 3) {
       noBtn.style.transform = "scale(" + (1 - noCount * 0.2) + ")";
-      document.getElementById("question").innerText = "Will u be my Valentine? 💘";
-    } else {
-      document.getElementById("question").innerText = "Choose an option:";
+    }
+
+    if (noCount === 3) {
+      document.getElementById("question").innerText = "Will you be my Valentine?";
       document.getElementById("buttons").innerHTML = `
-        <button class="yes" onclick="stuckClick()">Ur stuck now</button>
+        <button onclick="stuckClicked()">Ur stuck now</button>
         <button disabled>Can’t press no anymore ahahaha</button>
       `;
     }
   }
 
-  function stuckClick() {
+  function yesClicked() {
+    askTime();
+  }
+
+  function stuckClicked() {
     document.getElementById("question").innerText = "What time would u want to come out?";
     document.getElementById("buttons").innerHTML = `
-      <button class="yes" onclick="timeClick()">I will text you</button>
+      <button onclick="timeClicked()">I will text you</button>
       <button disabled>Thought it would end</button>
     `;
   }
 
-  function timeClick() {
+  function timeClicked() {
     document.getElementById("question").innerText = "Do I get a big hug for this?";
     document.getElementById("buttons").innerHTML = `
-      <button class="yes" onclick="hugYes()">Yes u will</button>
-      <button class="no" onclick="hugNo()" id="hugNoBtn">No u wont</button>
+      <button onclick="hugYes()">Yes u will</button>
+      <button id="hugNoBtn" onclick="hugNo()">No u wont</button>
     `;
   }
 
-  function hugNo() {
-    document.getElementById("hugNoBtn").innerText = "Yes you will";
-  }
-
   function hugYes() {
-    document.getElementById("question").innerText = "Yayyy 💖 See you soon!";
+    document.getElementById("question").innerText = "Yayyy 🥰";
     document.getElementById("buttons").innerHTML = "";
   }
 
-  function yesClick() {
-    document.getElementById("question").innerText = "Yayyy 💖 See you soon!";
-    document.getElementById("buttons").innerHTML = "";
+  function hugNo() {
+    document.getElementById("question").innerText = "Thought u ate didn’t u XD";
+    document.getElementById("buttons").innerHTML = `
+      <button onclick="hugYes()">Yes you will</button>
+    `;
   }
 </script>
 
