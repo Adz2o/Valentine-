@@ -76,32 +76,32 @@ function yesPage() {
 function timePage() {
   document.body.innerHTML = `
     <h1>Is 1:00 PM good for you? ⏰</h1>
-    <button onclick="yesFinal()">Yes</button>
+    <button onclick="yesPage()">Yes</button>
     <button onclick="noTime()">No</button>
   `;
 }
 
-function noTime() {
-  document.body.innerHTML = `
+function timeNo() {
+  updateContent(`
     <h1>What time works for you?</h1>
     <button onclick="alert('Text me the time ❤️')">Text me what time</button>
-    <button onclick="finalChoice()">Are you saying no because you don’t want to meet?</button>
-  `;
+    <button onclick="yesPage()">Let’s just go with 13:00 PM</button>
+  `);
 }
 
-function finalChoice() {
+function yesPage() {
   document.body.innerHTML = `
     <h1>I will pick you up at 1:00 PM 😎</h1>
-    <button onclick="alert('Yay! See you then 💕')">Okay</button>
+    <button onclick="alert(I Will See You Then 💕')">Okay</button>
     <button disabled>There is no second option 😏</button>
   `;
 }
-
-function yesFinal() {
-  document.body.innerHTML = "<h1>Yay! It’s a date 💖🌹</h1>";
-}
   
-function placePage() {
+  function yesPage() {
+  timePage();
+  }
+  
+function yesPage() {
   updateContent(`
     <h1>Where would you like to go? 🌹</h1>
     <button onclick="alert('Text me the place ❤️')">I Aint that Smart Just Text Me </button>
